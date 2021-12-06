@@ -8,7 +8,7 @@ class Dashboard extends Controller
 {
     public function index()
     {
-        $data['title'] = 'Dashboard';
+        $data['title'] = 'Dashboard | SaKu.meownikah.com';
         $data['ctrl'] = 'Dashboard';
         $data['ctrl_url'] = '/';
         $data['method'] = 'index';
