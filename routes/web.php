@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard;
+use App\Models\Saldo;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,19 +18,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Dashboard::class, 'index']);
 
 
-Route::get('/about', function () {
-    return view('about', [
-        'nama' => 'Aditya Pangestu',
-        'jsFile' => 'about.js',
-        'title' => 'About',
-        'email' => 'adit@meownikah.com',
-        'img' => 'FBu1jkmUYAU1XoA.jfif'
-    ]);
+Route::get('/about-{Saldo:id}', function (Saldo $Saldo) {
+    dd($Saldo->user->name);
 });
 
 Route::get('/blog', function () {
     return view('blog', [
         'jsFile' => 'blog.js',
         'title' => 'Blog ',
+        'detail' => 'Aku tak ingin menangis menerka gerimis aku tak ada nyali',
     ]);
 });
+
+/* 
+chiken and coke ung ketika marah bassemida, umak bangsung hambonnnnn eleven eleven elvene ayo ayo 
+i can walk away, i have in i miss you
+*/

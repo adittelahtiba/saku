@@ -18,46 +18,10 @@
         <div class="row">
 
             <!-- Left side columns -->
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="row">
-
-                    <!-- Sales Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card sales-card">
-
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="card-body">
-                                <h5 class="card-title">Sales <span>| Today</span></h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>145</h6>
-                                        <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div><!-- End Sales Card -->
-
                     <!-- Revenue Card -->
-                    <div class="col-xxl-4 col-md-6">
+                    <div class="col-xxl-4 col-md-4">
                         <div class="card info-card revenue-card">
 
                             <div class="filter">
@@ -74,15 +38,17 @@
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Revenue <span>| This Month</span></h5>
+                                <h5 class="card-title">Saldo Anda <span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-currency-dollar"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>$3,264</h6>
-                                        <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                                        <h6>{{ $total_saldo }}</h6>
+                                        @foreach ($list_saldo as $saldo)
+                                        <span class="text-muted small pt-2 ps-1">{{ $saldo->title }}</span> <span class="text-success small pt-1 fw-bold">{{ $saldo->nominal }}</span> |
+                                        @endforeach
 
                                     </div>
                                 </div>
@@ -91,8 +57,43 @@
                         </div>
                     </div><!-- End Revenue Card -->
 
-                    <!-- Customers Card -->
-                    <div class="col-xxl-4 col-xl-12">
+                    <!-- Sales Card -->
+                    <div class="col-xxl-4 col-md-4">
+                        <div class="card info-card sales-card">
+
+                            <div class="filter" id="filter-pengeluaran">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">Pengeluaran <span id="categori-pengeluaran"> </span></h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>145</h6>
+                                        <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Sales Card -->
+
+                    {{-- hutang piutang --}}
+                    <div class="col-xxl-4 col-xl-4">
 
                         <div class="card info-card customers-card">
 
@@ -110,7 +111,7 @@
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Customers <span>| This Year</span></h5>
+                                <h5 class="card-title">Hutang Piutang <span>| This Year</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -126,10 +127,11 @@
                             </div>
                         </div>
 
-                    </div><!-- End Customers Card -->
+                    </div>
+                    {{-- end hutang piutang --}}
 
                     <!-- Reports -->
-                    <div class="col-12">
+                    <div class="col-12 ">
                         <div class="card">
 
                             <div class="filter">
@@ -155,14 +157,14 @@
                                     document.addEventListener("DOMContentLoaded", () => {
                                         new ApexCharts(document.querySelector("#reportsChart"), {
                                             series: [{
-                                                name: 'Sales'
-                                                , data: [31, 40, 28, 51, 42, 82, 56]
-                                            , }, {
-                                                name: 'Revenue'
-                                                , data: [11, 32, 45, 32, 34, 52, 41]
+                                                name: 'Saldo'
+                                                , data: [31000, 4000, 28000, 51000, 4200, 82000, 5600, 31000, 4000, 28000, 51000, 4200, 82000, 5600, 31000, 4000, 28000, 51000, 4200, 82000, 5600, 31000, 4000, 28000, 51000, 4200, 82000, 5600, 4200, 82000, 5600]
                                             }, {
-                                                name: 'Customers'
-                                                , data: [15, 11, 32, 18, 9, 24, 11]
+                                                name: 'Pengeluaran'
+                                                , data: [31000, 4000, 28000, 51000, 4200, 82000, 5600, 31000, 4000, 28000, 51000, 4200, 82000, 5600, 31000, 4000, 28000, 51000, 4200, 82000, 5600, 31000, 4000, 28000, 51000, 4200, 82000, 5600, 4200, 82000, 5600]
+                                            }, {
+                                                name: 'Pemasukan'
+                                                , data: [11000, 320000, 45000, 3200, 3400, 5200, 41000]
                                             }]
                                             , chart: {
                                                 height: 350
@@ -174,7 +176,7 @@
                                             , markers: {
                                                 size: 4
                                             }
-                                            , colors: ['#4154f1', '#2eca6a', '#ff771d']
+                                            , colors: ['#0dcaf0', '#6f42c1', '#3eca6a']
                                             , fill: {
                                                 type: "gradient"
                                                 , gradient: {
@@ -192,8 +194,8 @@
                                                 , width: 2
                                             }
                                             , xaxis: {
-                                                type: 'datetime'
-                                                , categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                                                type: 'date'
+                                                , categories: ["Senin, tgl 01", "Selasa, tgl 02", "Rabu, tgl 03", "Kamis, tgl 04", "Jumat, tgl 05", "Sabtu, tgl 06", "Minggu, tgl 07", "Senin, tgl 08", "Selasa, tgl 09", "Senin, tgl 10", "Senin, tgl 11", "Selasa, tgl 12", "Rabu, tgl 13", "Kamis, tgl 14", "Jumat, tgl 15", "Sabtu, tgl 16", "Minggu, tgl 17", "Senin, tgl 18", "Selasa, tgl 19", "Senin, tgl 20", "Senin, tgl 21", "Selasa, tgl 22", "Rabu, tgl 23", "Kamis, tgl 24", "Jumat, tgl 25", "Sabtu, tgl 26", "Minggu, tgl 27", "Senin, tgl 28", "Selasa, tgl 29", , "Senin, tgl 30", "Selasa, tgl 31"]
                                             }
                                             , tooltip: {
                                                 x: {
@@ -229,7 +231,7 @@
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+                                <h5 class="card-title">Transaksi Anda <span>| Bulan Ini</span></h5>
 
                                 <table class="table table-borderless datatable">
                                     <thead>
@@ -286,7 +288,7 @@
                     </div><!-- End Recent Sales -->
 
                     <!-- Top Selling -->
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <div class="card top-selling">
 
                             <div class="filter">
@@ -357,13 +359,14 @@
                             </div>
 
                         </div>
-                    </div><!-- End Top Selling -->
+                    </div> --}}
+                    <!-- End Top Selling -->
 
                 </div>
             </div><!-- End Left side columns -->
 
             <!-- Right side columns -->
-            <div class="col-lg-4">
+            <div class="col-lg-12">
 
                 <!-- Recent Activity -->
                 <div class="card">
@@ -439,7 +442,7 @@
                 </div><!-- End Recent Activity -->
 
                 <!-- Budget Report -->
-                <div class="card">
+                {{-- <div class="card">
                     <div class="filter">
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -511,10 +514,11 @@
                         </script>
 
                     </div>
-                </div><!-- End Budget Report -->
+                </div> --}}
+                <!-- End Budget Report -->
 
                 <!-- Website Traffic -->
-                <div class="card">
+                {{-- <div class="card">
                     <div class="filter">
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -590,10 +594,11 @@
                         </script>
 
                     </div>
-                </div><!-- End Website Traffic -->
+                </div> --}}
+                <!-- End Website Traffic -->
 
                 <!-- News & Updates Traffic -->
-                <div class="card">
+                {{-- <div class="card">
                     <div class="filter">
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -644,7 +649,8 @@
                         </div><!-- End sidebar recent posts-->
 
                     </div>
-                </div><!-- End News & Updates -->
+                </div> --}}
+                <!-- End News & Updates -->
 
             </div><!-- End Right side columns -->
 
